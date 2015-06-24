@@ -1,17 +1,13 @@
-FROM gliderlabs/alpine:3.1
-RUN apk-install curl bash
-ENV STATSD_LIBRATO_VERSION 1.0.0
+FROM gliderlabs/alpine:3.2
 
-ADD https://github.com/jcoene/statsd-librato/releases/download/$STATSD_LIBRATO_VERSION/statsd-$STATSD_LIBRATO_VERSION.linux-amd64.tar.gz /tmp/statsd-$STATSD_LIBRATO_VERSION.linux-amd64.tar.gz
-RUN tar -zxf /tmp/statsd-$STATSD_LIBRATO_VERSION.linux-amd64.tar.gz
+ENV USER root
+RUN apk --update add python nodejs bash
 
+EXPOSE 8125/udp
 EXPOSE 8125
 
-CMD /statsd-$STATSD_LIBRATO_VERSION.linux-amd64/bin/statsd \
-    -address="0.0.0.0:8125" \
-    -debug="$DEBUG" \
-    -flush="$FLUSH_INTERVAL" \
-    -percentiles="$PERCENTILES" \
-    -source="$LIBRATO_SOURCE" \
-    -token="$LIBRATO_TOKEN" \
-    -user="$LIBRATO_USER"
+RUN npm install -g statsd statsd-librato-backend
+RUN mkdir -p /etc/statsd
+ADD ./config.js /etc/statsd/
+
+ENTRYPOINT ["statsd", "/etc/statsd/config.js"]
