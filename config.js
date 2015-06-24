@@ -7,7 +7,7 @@
 
   backends: ["statsd-librato-backend"],
 
-  flushInterval: process.env.FLUSH_INTERVAL,
+  flushInterval: (process.env.FLUSH_INTERVAL || 0) * 1000,
   percentThreshold: process.env.PERCENTILES,
   debug: process.env.DEBUG,
 
