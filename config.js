@@ -8,7 +8,7 @@
   backends: ["statsd-librato-backend"],
 
   flushInterval: (process.env.FLUSH_INTERVAL || 0) * 1000,
-  percentThreshold: process.env.PERCENTILES,
+  percentThreshold: (process.env.PERCENTILES || "").split(",").map(function(s) { return parseFloat(s) }).filter(function(f) { return !isNaN(f) }),
   debug: process.env.DEBUG,
 
   address: "0.0.0.0",
