@@ -2,7 +2,10 @@
   librato: {
     email: process.env.LIBRATO_USER,
     token: process.env.LIBRATO_TOKEN,
-    source: process.env.LIBRATO_SOURCE
+    source: process.env.LIBRATO_SOURCE,
+    postTimeoutSecs: +(process.env.LIBRATO_POST_TIMEOUT || ""),
+    retryDelaySecs: +(process.env.LIBRATO_RETRY_DELAY || ""),
+    batchSize: +(process.env.LIBRATO_BATCH_SIZE || "")
   },
 
   backends: ["statsd-librato-backend"],
