@@ -1,7 +1,5 @@
 # Statsd-librato
 
-[https://github.com/jcoene/statsd-librato](https://github.com/jcoene/statsd-librato) in a container.
-
 A typical systemd unit file, deployed via Ansible, is below.
 
 ```
