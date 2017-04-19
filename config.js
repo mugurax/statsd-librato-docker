@@ -19,7 +19,7 @@
   } ),
   debug: process.env.DEBUG,
 
-  histogram: process.env.HISTOGRAM || [],
+  histogram: JSON.parse( process.env.HISTOGRAM ) || [],
 
   address: "0.0.0.0",
   port: 8125
