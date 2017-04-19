@@ -3,19 +3,23 @@
     email: process.env.LIBRATO_USER,
     token: process.env.LIBRATO_TOKEN,
     source: process.env.LIBRATO_SOURCE,
-    postTimeoutSecs: +(process.env.LIBRATO_POST_TIMEOUT || ""),
-    retryDelaySecs: +(process.env.LIBRATO_RETRY_DELAY || ""),
-    batchSize: +(process.env.LIBRATO_BATCH_SIZE || "")
+    postTimeoutSecs: +( process.env.LIBRATO_POST_TIMEOUT || "" ),
+    retryDelaySecs: +( process.env.LIBRATO_RETRY_DELAY || "" ),
+    batchSize: +( process.env.LIBRATO_BATCH_SIZE || "" )
   },
 
-  backends: ["statsd-librato-backend"],
+  backends: [ "statsd-librato-backend" ],
 
   deleteIdleStats: true,
-  flushInterval: (process.env.FLUSH_INTERVAL || 0) * 1000,
-  percentThreshold: (process.env.PERCENTILES || "").split(",").map(function(s) { return parseFloat(s) }).filter(function(f) { return !isNaN(f) }),
+  flushInterval: ( process.env.FLUSH_INTERVAL || 0 ) * 1000,
+  percentThreshold: ( process.env.PERCENTILES || "" ).split( "," ).map( function( s ) {
+    return parseFloat( s )
+  } ).filter( function( f ) {
+    return !isNaN( f )
+  } ),
   debug: process.env.DEBUG,
 
-  histogram: [{ metric: 'http_2xx_ms', bins: [ 0.01, 0.1, 1, 10, 'inf'] }],
+  histogram: process.env.HISTOGRAM || [],
 
   address: "0.0.0.0",
   port: 8125
