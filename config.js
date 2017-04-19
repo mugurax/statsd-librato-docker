@@ -8,7 +8,7 @@
     batchSize: +( process.env.LIBRATO_BATCH_SIZE || "" )
   },
 
-  backends: [ "statsd-librato-backend" ],
+  backends: [ "./backends/console", "statsd-librato-backend" ],
 
   deleteIdleStats: true,
   flushInterval: ( process.env.FLUSH_INTERVAL || 0 ) * 1000,
@@ -19,7 +19,7 @@
   } ),
   debug: process.env.DEBUG,
 
-  histogram: JSON.parse( process.env.HISTOGRAM ) || [],
+  histogram: JSON.parse( process.env.HISTOGRAM || "[]" ),
 
   address: "0.0.0.0",
   port: 8125
