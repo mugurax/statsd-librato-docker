@@ -15,7 +15,7 @@
   percentThreshold: (process.env.PERCENTILES || "").split(",").map(function(s) { return parseFloat(s) }).filter(function(f) { return !isNaN(f) }),
   debug: process.env.DEBUG,
 
-  histogram: [{ metric: 'render', bins: [ 0.01, 0.1, 1, 10, 'inf'] }]
+  histogram: [{ metric: 'http_2xx_ms', bins: [ 0.01, 0.1, 1, 10, 'inf'] }],
 
   address: "0.0.0.0",
   port: 8125
