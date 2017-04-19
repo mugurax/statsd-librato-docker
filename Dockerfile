@@ -6,7 +6,7 @@ RUN apk --update add python nodejs bash
 EXPOSE 8125/udp
 EXPOSE 8125
 
-RUN npm install -g statsd statsd-librato-backend
+RUN npm install -g statsd statsd-librato-backend@0.1.7
 RUN mkdir -p /etc/statsd
 ADD ./config.js /etc/statsd/
 
